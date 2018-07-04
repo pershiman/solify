@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class SolinstralningResponse {
 
     @JsonProperty
-    private String takyta;
+    private Integer takyta;
 
-    public String getTakyta() {
+    public Integer getTakyta() {
         return takyta;
     }
 
-    public void setTakyta(String takyta) {
+    public void setTakyta(Integer takyta) {
         this.takyta = takyta;
     }
 }

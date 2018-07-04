@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
+import java.util.HashMap;
 
 @Component
 public class WmsClient {
@@ -34,12 +35,40 @@ public class WmsClient {
 
         logger.info("Raw response: " + rawResponse);
 
-        SolinstralningResponse solinstralningResponse = new SolinstralningResponse();
+        SolinstralningResponse solinstralningResponse = getSolinstralningResponse(rawResponse);
 
-        int index_takyta = rawResponse.indexOf("takyta");
-        String takyta = rawResponse.toString().substring(index_takyta + 9, index_takyta + 12);
-        solinstralningResponse.setTakyta(takyta);
 
         return solinstralningResponse;
+    }
+
+    private SolinstralningResponse getSolinstralningResponse(String rawResponse) {
+        SolinstralningResponse solinstralningResponse = new SolinstralningResponse();
+
+        HashMap<String, Integer> responseMap = parseResponse(rawResponse);
+
+        solinstralningResponse.setTakyta(responseMap.get("takyta"));
+
+        return solinstralningResponse;
+    }
+
+    private HashMap<String, Integer> parseResponse(String rawResponse) {
+        String responseLines[] = rawResponse.split("\\r?\\n");
+        HashMap<String, Integer> responseMap = new HashMap<String, Integer>();
+
+        for (String responseLine: responseLines) {
+            int index_equals = responseLine.indexOf("=");
+
+            if(index_equals == -1)
+                continue;
+
+            String key = responseLine.substring(0, index_equals - 1);
+            try {
+                String value = responseLine.substring(index_equals + 2);
+                responseMap.put(key, Integer.parseInt(value));
+            } catch (NumberFormatException e) {
+                logger.info("Not an integer");
+            }
+        }
+        return responseMap;
     }
 }
