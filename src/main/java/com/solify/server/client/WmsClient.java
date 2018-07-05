@@ -20,7 +20,7 @@ public class WmsClient {
     private static String queryByggLayers = "QUERY_LAYERS=mftemp:solinstralning-2012-byggnader&";
     private static String bboxDim = "&width=2&height=2&x=1&y=1";
 
-    public SolinstralningResponse getSoldata(Double longitude, Double latitude) {
+    public HashMap<String, Integer> getSoldata(Double longitude, Double latitude) {
         String lng_add =  Double.toString(longitude + 0.0001);
         String lat_add = Double.toString(latitude + 0.0001);
         String uri = "http://kartor.miljo.stockholm.se/geoserver/wms?" + byggLayers + reqType + coord + queryByggLayers +
@@ -35,20 +35,16 @@ public class WmsClient {
 
         logger.info("Raw response: " + rawResponse);
 
-        SolinstralningResponse solinstralningResponse = getSolinstralningResponse(rawResponse);
+        HashMap<String, Integer> responseMap = getSolinstralningResponse(rawResponse);
 
 
-        return solinstralningResponse;
+        return responseMap;
     }
 
-    private SolinstralningResponse getSolinstralningResponse(String rawResponse) {
-        SolinstralningResponse solinstralningResponse = new SolinstralningResponse();
+    private HashMap<String, Integer> getSolinstralningResponse(String rawResponse) {
 
         HashMap<String, Integer> responseMap = parseResponse(rawResponse);
-
-        solinstralningResponse.setTakyta(responseMap.get("takyta"));
-
-        return solinstralningResponse;
+        return responseMap;
     }
 
     private HashMap<String, Integer> parseResponse(String rawResponse) {
