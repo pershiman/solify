@@ -36,11 +36,16 @@ public class WmsService {
         int sys_size = setSysSize(responseMap, solinstralningResponse);
         int numOfModules = setNumOfModules(responseMap, solinstralningResponse);
         int tot_price = setPrice(numOfModules, solinstralningResponse);
-        setSubsidy(tot_price, solinstralningResponse);
-        setEarnings(sys_size, solinstralningResponse);
+        int subsidy = setSubsidy(tot_price, solinstralningResponse);
+        int total_earnings = setEarnings(sys_size, solinstralningResponse);
         setEnvironmentWin(sys_size, solinstralningResponse);
+        setProfit(total_earnings, tot_price, subsidy, solinstralningResponse);
         solinstralningResponse.setTakyta(responseMap.get(WmsResponseKeys.TAKYTA));
         return solinstralningResponse;
+    }
+
+    private void setProfit(int total_earnings, int tot_price, int subsidy, SolinstralningResponse solinstralningResponse) {
+        solinstralningResponse.setProfit(total_earnings - (tot_price - subsidy));
     }
 
     private int setSysSize(HashMap<String, Integer> responseMap, SolinstralningResponse solinstralningResponse) {
@@ -57,9 +62,10 @@ public class WmsService {
         return sys_size;
     }
 
-    private void setSubsidy(int tot_price, SolinstralningResponse solinstralningResponse) {
-        double subsidy = (double) tot_price * CalibConstants.ROT_SUBSIDY;
+    private int setSubsidy(int tot_price, SolinstralningResponse solinstralningResponse) {
+        double subsidy = (double) tot_price * CalibConstants.SOLAR_CELL_SUBSIDY;
         solinstralningResponse.setSubsidy((int) subsidy);
+        return (int)subsidy;
     }
 
     private int setPrice(int numOfModules, SolinstralningResponse solinstralningResponse) {
@@ -85,11 +91,13 @@ public class WmsService {
         return numOfModules;
     }
 
-    private void setEarnings(int sys_size, SolinstralningResponse solinstralningResponse) {
+    private int setEarnings(int sys_size, SolinstralningResponse solinstralningResponse) {
         int tot_earnings = sys_size * (calibConfig.getEl_price() + calibConfig.getCertificate()
                 + calibConfig.getTaxredux() + calibConfig.getMaintainace_cost()
                 + calibConfig.getGridbenefit()) * calibConfig.getLifelength();
         solinstralningResponse.setTot_earnings(tot_earnings);
+
+        return tot_earnings;
     }
     // TODO
     private void setEnvironmentWin(int sys_size, SolinstralningResponse solinstralningResponse) {

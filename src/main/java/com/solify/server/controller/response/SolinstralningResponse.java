@@ -25,6 +25,9 @@ public class SolinstralningResponse {
     @JsonProperty
     private Double env_win;
 
+    @JsonProperty
+    private Integer profit;
+
     public Integer getTakyta() {
         return takyta;
     }
@@ -79,5 +82,13 @@ public class SolinstralningResponse {
 
     public void setEnv_win(Double env_win) {
         this.env_win = env_win;
+    }
+
+    public Integer getProfit() {
+        return profit;
+    }
+
+    public void setProfit(Integer profit) {
+        this.profit = profit;
     }
 }
