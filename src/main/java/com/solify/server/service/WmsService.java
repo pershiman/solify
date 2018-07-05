@@ -10,6 +10,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 @Service
@@ -51,13 +53,15 @@ public class WmsService {
     private int setSysSize(HashMap<String, Integer> responseMap, SolinstralningResponse solinstralningResponse) {
         int wat_1000 = 0;
         int wat_950_10 = 0;
+        DecimalFormat df = new DecimalFormat("#.#");
+        df.setRoundingMode(RoundingMode.CEILING);
         if(responseMap.get(WmsResponseKeys.TAKYTA_1000) > CalibConstants.MIN_ROOF_AREA) {
             wat_1000 = responseMap.get(WmsResponseKeys.SOL_1000) * calibConfig.getPerc_of_roof_area();
         }
         if(responseMap.get(WmsResponseKeys.TAK_950_10) > CalibConstants.MIN_ROOF_AREA) {
             wat_950_10 = responseMap.get(WmsResponseKeys.SOL_950_10) * calibConfig.getPerc_of_roof_area();
         }
-        int sys_size = (wat_1000 + wat_950_10) / 1000;
+        int sys_size = (wat_1000 + wat_950_10) / 100;
         solinstralningResponse.setSys_size(sys_size);
         return sys_size;
     }
@@ -78,8 +82,8 @@ public class WmsService {
     private int setNumOfModules(HashMap<String, Integer> responseMap, SolinstralningResponse solinstralningResponse) {
         double modules_1000 = 0;
         double modules_950_10 = 0;
-        int area_950_10 = responseMap.get(WmsResponseKeys.TAK_950_10);
         int area_1000 = responseMap.get(WmsResponseKeys.TAKYTA_1000);
+        int area_950_10 = responseMap.get(WmsResponseKeys.TAK_950_10);
         if(area_1000 > CalibConstants.MIN_ROOF_AREA) {
             modules_1000 = (double) area_1000 * calibConfig.getPerc_of_roof_area() / (calibConfig.getSolarcellmodule_area() * 100);
         }
@@ -92,9 +96,9 @@ public class WmsService {
     }
 
     private int setEarnings(int sys_size, SolinstralningResponse solinstralningResponse) {
-        int tot_earnings = sys_size * (calibConfig.getEl_price() + calibConfig.getCertificate()
+        int tot_earnings = (int) (sys_size * (calibConfig.getEl_price() + calibConfig.getCertificate()
                 + calibConfig.getTaxredux() + calibConfig.getMaintainace_cost()
-                + calibConfig.getGridbenefit()) * calibConfig.getLifelength();
+                + calibConfig.getGridbenefit()) * calibConfig.getLifelength());
         solinstralningResponse.setTot_earnings(tot_earnings);
 
         return tot_earnings;

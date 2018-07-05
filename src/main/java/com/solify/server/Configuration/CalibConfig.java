@@ -9,50 +9,50 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties
 public class CalibConfig {
 
-    private int el_price;
-    private int certificate;
-    private int taxredux;
-    private int maintainace_cost;
-    private int gridbenefit;
+    private double el_price;
+    private double certificate;
+    private double taxredux;
+    private double maintainace_cost;
+    private double gridbenefit;
     private int lifelength;
 
-    public int getEl_price() {
+    public double getEl_price() {
         return el_price;
     }
 
-    public void setEl_price(int el_price) {
+    public void setEl_price(double el_price) {
         this.el_price = el_price;
     }
 
-    public int getCertificate() {
+    public double getCertificate() {
         return certificate;
     }
 
-    public void setCertificate(int certificate) {
+    public void setCertificate(double certificate) {
         this.certificate = certificate;
     }
 
-    public int getTaxredux() {
+    public double getTaxredux() {
         return taxredux;
     }
 
-    public void setTaxredux(int taxredux) {
+    public void setTaxredux(double taxredux) {
         this.taxredux = taxredux;
     }
 
-    public int getMaintainace_cost() {
+    public double getMaintainace_cost() {
         return maintainace_cost;
     }
 
-    public void setMaintainace_cost(int maintainace_cost) {
+    public void setMaintainace_cost(double maintainace_cost) {
         this.maintainace_cost = maintainace_cost;
     }
 
-    public int getGridbenefit() {
+    public double getGridbenefit() {
         return gridbenefit;
     }
 
-    public void setGridbenefit(int gridbenefit) {
+    public void setGridbenefit(double gridbenefit) {
         this.gridbenefit = gridbenefit;
     }
 

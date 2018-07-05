@@ -1,7 +1,5 @@
 package com.solify.server.controller;
 
-
-import com.solify.server.controller.request.SolinstralningRequest;
 import com.solify.server.controller.response.SolinstralningResponse;
 import com.solify.server.service.WmsService;
 import org.apache.logging.log4j.LogManager;
@@ -10,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.ws.Response;
 
 @RestController
 @RequestMapping(value = "/wms")
