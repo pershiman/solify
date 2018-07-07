@@ -32,7 +32,7 @@ public class WmsServiceTest {
 
     @Before
     public void setup() {
-        when(wmsClient.getSoldata(anyDouble(), anyDouble())).thenReturn(createResponse());
+        when(wmsClient.getSoldata(anyDouble(), anyDouble(), anyDouble(), anyDouble())).thenReturn(createResponse());
         when(calibConfig.getPerc_of_roof_area()).thenReturn(70);
         when(calibConfig.getSolarcellmodule_area()).thenReturn(1.64);
         when(calibConfig.getModule_price()).thenReturn(2125);
@@ -45,11 +45,13 @@ public class WmsServiceTest {
         when(calibConfig.getMaintainace_cost()).thenReturn(0.0);
         when(calibConfig.getGridbenefit()).thenReturn(0.05);
         when(calibConfig.getLifelength()).thenReturn(30);
+        when(calibConfig.getBbox_lng_add()).thenReturn(0.00001);
+        when(calibConfig.getBbox_lat_add()).thenReturn(0.00001);
     }
 
     @Test
     public void test__fetchWmsData__success() {
-        SolinstralningResponse response = wmsService.fetchWmsData(anyDouble(), anyDouble());
+        SolinstralningResponse response = wmsService.fetchWmsData(0.001, 0.0001);
         assertEquals(3451, response.getSys_size().intValue());
         assertEquals(14, response.getNbr_of_modules().intValue());
         assertEquals(45750, response.getTot_price().intValue());

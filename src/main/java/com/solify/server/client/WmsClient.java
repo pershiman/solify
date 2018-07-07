@@ -20,9 +20,9 @@ public class WmsClient {
     private static String queryByggLayers = "QUERY_LAYERS=mftemp:solinstralning-2012-byggnader&";
     private static String bboxDim = "&width=2&height=2&x=1&y=1";
 
-    public HashMap<String, Integer> getSoldata(Double longitude, Double latitude) {
-        String lng_add =  Double.toString(longitude + 0.0001);
-        String lat_add = Double.toString(latitude + 0.0001);
+    public HashMap<String, Integer> getSoldata(double longitude, double latitude, double bbox_lng_add, double bbox_lat_add) {
+        String lng_add =  Double.toString(longitude + bbox_lng_add);
+        String lat_add = Double.toString(latitude + bbox_lat_add);
         String uri = "http://kartor.miljo.stockholm.se/geoserver/wms?" + byggLayers + reqType + coord + queryByggLayers +
                 "bbox=" + longitude + "," + latitude + "," + lng_add + "," + lat_add + bboxDim;
 

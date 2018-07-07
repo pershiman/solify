@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties
 public class CalibConfig {
 
+    private double bbox_lng_add;
+    private double bbox_lat_add;
+
     private double el_price;
     private double certificate;
     private double taxredux;
@@ -117,5 +120,21 @@ public class CalibConfig {
 
     public void setPerc_of_roof_area(int perc_of_roof_area) {
         this.perc_of_roof_area = perc_of_roof_area;
+    }
+
+    public double getBbox_lng_add() {
+        return bbox_lng_add;
+    }
+
+    public void setBbox_lng_add(double bbox_lng_add) {
+        this.bbox_lng_add = bbox_lng_add;
+    }
+
+    public double getBbox_lat_add() {
+        return bbox_lat_add;
+    }
+
+    public void setBbox_lat_add(double bbox_lat_add) {
+        this.bbox_lat_add = bbox_lat_add;
     }
 }

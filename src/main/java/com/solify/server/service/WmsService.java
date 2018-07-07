@@ -24,9 +24,10 @@ public class WmsService {
     @Autowired
     CalibConfig calibConfig;
 
-    public SolinstralningResponse fetchWmsData(Double longitude, Double latitude) {
+    public SolinstralningResponse fetchWmsData(double longitude, double latitude) {
         logger.info("=========== Entering wmsService process ============");
-        HashMap<String, Integer> responseMap = wmsClient.getSoldata(longitude, latitude);
+        HashMap<String, Integer> responseMap = wmsClient.getSoldata(longitude, latitude,
+                calibConfig.getBbox_lng_add(), calibConfig.getBbox_lat_add());
         SolinstralningResponse solinstralningResponse = createResult(responseMap);
         return solinstralningResponse;
     }
