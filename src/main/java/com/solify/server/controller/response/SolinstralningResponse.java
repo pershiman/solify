@@ -8,6 +8,18 @@ public class SolinstralningResponse {
     private Integer takyta;
 
     @JsonProperty
+    private Integer tak_1000;
+
+    @JsonProperty
+    private Integer tak_950_10;
+
+    @JsonProperty
+    private Integer sol_1000;
+
+    @JsonProperty
+    private Integer sol_950_10;
+
+    @JsonProperty
     private Integer nbr_of_modules;
 
     @JsonProperty
@@ -90,5 +102,37 @@ public class SolinstralningResponse {
 
     public void setProfit(Integer profit) {
         this.profit = profit;
+    }
+
+    public Integer getSol_950_10() {
+        return sol_950_10;
+    }
+
+    public void setSol_950_10(Integer sol_950_10) {
+        this.sol_950_10 = sol_950_10;
+    }
+
+    public Integer getSol_1000() {
+        return sol_1000;
+    }
+
+    public void setSol_1000(Integer sol_1000) {
+        this.sol_1000 = sol_1000;
+    }
+
+    public Integer getTak_950_10() {
+        return tak_950_10;
+    }
+
+    public void setTak_950_10(Integer tak_950_10) {
+        this.tak_950_10 = tak_950_10;
+    }
+
+    public Integer getTak_1000() {
+        return tak_1000;
+    }
+
+    public void setTak_1000(Integer tak_1000) {
+        this.tak_1000 = tak_1000;
     }
 }

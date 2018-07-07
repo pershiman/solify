@@ -43,6 +43,10 @@ public class WmsService {
         setEnvironmentWin(sys_size, solinstralningResponse);
         setProfit(total_earnings, tot_price, subsidy, solinstralningResponse);
         solinstralningResponse.setTakyta(responseMap.get(WmsResponseKeys.TAKYTA));
+        solinstralningResponse.setTak_1000(responseMap.get(WmsResponseKeys.TAKYTA_1000));
+        solinstralningResponse.setTak_950_10(responseMap.get(WmsResponseKeys.TAK_950_10));
+        solinstralningResponse.setSol_1000(responseMap.get(WmsResponseKeys.SOL_1000));
+        solinstralningResponse.setSol_950_10(responseMap.get(WmsResponseKeys.SOL_950_10));
         return solinstralningResponse;
     }
 
