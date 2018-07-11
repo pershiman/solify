@@ -1,23 +1,36 @@
 package com.solify.server.Configuration;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
-@Component
+@Configuration
 @PropertySource("classpath:application.properties")
-@ConfigurationProperties
 public class CalibConfig {
 
+    @Value("${wms.bbox_lng}")
     private double bbox_lng_add;
+    @Value("${wms.bbox_lat}")
     private double bbox_lat_add;
 
+    @Value("${el.el_price}")
     private double el_price;
+    @Value("${el.certificate}")
     private double certificate;
+    @Value("${el.taxredux}")
     private double taxredux;
+    @Value("${el.maintainace_cost}")
     private double maintainace_cost;
+    @Value("${el.gridbenefit}")
     private double gridbenefit;
+
+    @Value("${misc.lifelength}")
     private int lifelength;
+    @Value("${misc.solarcellmodule_area}")
+    private Double solarcellmodule_area;
+    @Value("${misc.perc_of_roof_area}")
+    private int perc_of_roof_area;
+
 
     public double getEl_price() {
         return el_price;
@@ -67,11 +80,14 @@ public class CalibConfig {
         this.lifelength = lifelength;
     }
 
-    private Double solarcellmodule_area;
+
+    @Value("${cost.module_price}")
     private int module_price;
-    private int perc_of_roof_area;
+    @Value("${cost.elecComp_price}")
     private int elecComp_price;
+    @Value("${cost.armature_price}")
     private int armature_price;
+    @Value("${cost.assembly_price}")
     private int assembly_price;
 
     public Double getSolarcellmodule_area() {
