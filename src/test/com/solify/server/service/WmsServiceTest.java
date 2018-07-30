@@ -45,6 +45,7 @@ public class WmsServiceTest {
         when(calibConfig.getMaintainace_cost()).thenReturn(0.0);
         when(calibConfig.getGridbenefit()).thenReturn(0.05);
         when(calibConfig.getLifelength()).thenReturn(30);
+        when(calibConfig.getSolarcellmodule_efficiency()).thenReturn(0.2);
         when(calibConfig.getBbox_lng_add()).thenReturn(0.00001);
         when(calibConfig.getBbox_lat_add()).thenReturn(0.00001);
     }
@@ -52,12 +53,12 @@ public class WmsServiceTest {
     @Test
     public void test__fetchWmsData__success() {
         SolinstralningResponse response = wmsService.fetchWmsData(0.001, 0.0001);
-        assertEquals(3451, response.getSys_size().intValue());
+        assertEquals(23466, response.getSys_size().intValue());
         assertEquals(14, response.getNbr_of_modules().intValue());
         assertEquals(45750, response.getTot_price().intValue());
         assertEquals(13725, response.getSubsidy().intValue());
-        assertEquals(113882, response.getTot_earnings().intValue());
-        assertEquals(81857, response.getProfit().intValue());
+        assertEquals(774378, response.getTot_earnings().intValue());
+        assertEquals(742353, response.getProfit().intValue());
     }
 
     private HashMap<String, Integer> createResponse() {

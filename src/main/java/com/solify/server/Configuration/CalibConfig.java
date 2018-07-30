@@ -30,7 +30,8 @@ public class CalibConfig {
     private Double solarcellmodule_area;
     @Value("${misc.perc_of_roof_area}")
     private int perc_of_roof_area;
-
+    @Value("${misc.solarcellmodule_efficiency}")
+    private double solarcellmodule_efficiency;
 
     public double getEl_price() {
         return el_price;
@@ -152,5 +153,13 @@ public class CalibConfig {
 
     public void setBbox_lat_add(double bbox_lat_add) {
         this.bbox_lat_add = bbox_lat_add;
+    }
+
+    public double getSolarcellmodule_efficiency() {
+        return solarcellmodule_efficiency;
+    }
+
+    public void setSolarcellmodule_efficiency(double solarcellmodule_efficiency) {
+        this.solarcellmodule_efficiency = solarcellmodule_efficiency;
     }
 }
