@@ -70,6 +70,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <outputDirectory>${project.basedir}/docker/</outputDirectory>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>io.fabric8</groupId>
@@ -79,10 +82,16 @@
                     <!--<dockerHost>tcp://REMOTE_IP:2375</dockerHost> -->
                     <images>
                         <image>
-                            <name>solify-server:${project.version}</name>
+                            <name>pershi/solify</name>
                             <alias>solify-dockerimage</alias>
                             <build>
                                 <dockerFileDir>${project.basedir}/docker/</dockerFileDir>
+                                <tags><tag>
+                                    ${project.version}
+                                </tag>
+                                <tag>
+                                    latest
+                                </tag></tags>
                             </build>
                             <run>
                                  <ports>
@@ -94,12 +103,8 @@
                  </configuration>
                  <executions>
                      <execution>
-                         <id>start</id>
-                         <phase>pre-integration-test</phase>
                          <goals>
-                             <goal>stop</goal>
                              <goal>build</goal>
-                             <goal>start</goal>
                          </goals>
                      </execution>
                  </executions>
